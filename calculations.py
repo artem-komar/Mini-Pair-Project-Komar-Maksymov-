@@ -17,6 +17,9 @@ raw_data=yf.download(ticker_name, start=start_date, end=end_date)
 df=raw_data[["Open", "High", "Low", "Close", "Volume"]].copy()
 df=df.dropna()
 
+price_columns=["Open", "High", "Low", "Close", "Volume"]
+df[price_columns]=df[price_columns].round(1)
+
 print(f"Дані очищено.")
 print(f"Кількість торгових днів: {len(df)}")
 print(f"Перші 5 позицій")
