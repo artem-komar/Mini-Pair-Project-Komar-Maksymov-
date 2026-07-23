@@ -12,7 +12,7 @@ print(f"Обраний актив: {ticker_name}")
 print(f"Біржа: {exchange}")
 print(f"Валюта: {currency}")
 print(f"Отримані дані з {start_date} по {end_date} включно.")
-raw_data=yf.download(ticker_name, start=start_date, end=end_date)
+raw_data=yf.download(ticker_name, start=start_date, end=end_date,progress=False)
 
 df=raw_data[["Open", "High", "Low", "Close", "Volume"]].copy()
 df=df.dropna()
@@ -20,7 +20,6 @@ df=df.dropna()
 price_columns=["Open", "High", "Low", "Close", "Volume"]
 df[price_columns]=df[price_columns].round(1)
 
-print(f"Дані очищено.")
 print(f"Кількість торгових днів: {len(df)}")
 print(f"Перші 5 позицій")
 print(df.head())
