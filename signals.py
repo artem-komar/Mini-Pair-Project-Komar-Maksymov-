@@ -9,9 +9,21 @@ long_window = 100
 df["MA_short"] = df["Close"].rolling(window=short_window).mean()
 df["MA_long"] = df["Close"].rolling(window=long_window).mean()
 
+
+
+# # Оптимізую стратегію за допомогою буферу, адже результат є критично не задовільнім
+
+
 df["Position"] = 0
 df.loc[df["MA_short"] > df["MA_long"], "Position"] = 1
 
+df["ssignal_change"] = df["Position"].diff()
+
+df["Position"] = df["Position"].ffill().fillna(0)
+# df["Position"] = 0
+# старий концепт
+# df.loc[df["MA_short"] > df["MA_long"], "Position"] = 1
+#
 df["ssignal_change"] = df["Position"].diff()
 
 #Вводимо сигнали, аби зараз усі були на Hold
