@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 df = pd.read_csv("brk_-_b_data.csv", index_col=0, parse_dates=True)
 short_window = 20
@@ -9,9 +10,21 @@ long_window = 100
 df["MA_short"] = df["Close"].rolling(window=short_window).mean()
 df["MA_long"] = df["Close"].rolling(window=long_window).mean()
 
-df["Position"] = 0
-df.loc[df["MA_short"] > df["MA_long"], "Position"] = 1
 
+
+# # Оптимізую стратегію за допомогою буферу, адже результат є критично не задовільнім
+
+df["Position"] = np.nan # робимо це для сімейного достатку у операції ffill().fillna(0)
+buffer = df["MA_long"] * 0.002
+#все було зроблено для цього буферу
+df.loc[df["MA_short"] > df["MA_long"] , "Position"] = 1
+df.loc[df["MA_short"] < (df["MA_long"] - buffer), "Position"] = 0
+
+df["Position"] = df["Position"].ffill().fillna(0)
+# df["Position"] = 0
+# старий концепт
+# df.loc[df["MA_short"] > df["MA_long"], "Position"] = 1
+#
 df["ssignal_change"] = df["Position"].diff()
 
 #Вводимо сигнали, аби зараз усі були на Hold
