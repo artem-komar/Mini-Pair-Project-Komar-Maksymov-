@@ -15,7 +15,7 @@ df["MA_long"] = df["Close"].rolling(window=long_window).mean()
 # # Оптимізую стратегію за допомогою буферу, адже результат є критично не задовільнім
 
 df["Position"] = np.nan # робимо це для сімейного достатку у операції ffill().fillna(0)
-buffer = df["MA_long"] * 0.002
+buffer = df["MA_long"] * 0.05
 #все було зроблено для цього буферу
 df.loc[df["MA_short"] > df["MA_long"] , "Position"] = 1
 df.loc[df["MA_short"] < (df["MA_long"] - buffer), "Position"] = 0
