@@ -27,6 +27,23 @@ plt.scatter(buy_signals.index, buy_signals['Close'], label='Купівля (Buy)
 sell_signals = df[df['Signal'] == 'Sell']
 plt.scatter(sell_signals.index, sell_signals['Close'], label='Продаж (Sell)', marker='v', color='red', s=150, zorder=5)
 
+plt.ylabel('Ціна ($)', fontsize=12)
+plt.legend(loc='upper left')
+plt.grid(True)
+
+
+#баланс портфеля
+ax2 = plt.subplot(2, 1, 2, sharex=ax1)
+plt.title('Динаміка балансу портфеля (Portfolio Value)', fontsize=14)
+plt.plot(df.index, df['Portfolio_Value'], label='Баланс стратегії', color='purple', linewidth=2)
+plt.axhline(y=start_capital, color='red', linestyle=':', label='Початковий депозит')
+
+
+plt.xlabel('Дата', fontsize=12)
+plt.ylabel('Капітал ($)', fontsize=12)
+plt.legend(loc='upper left')
+plt.grid(True)
+
 
 #збереження файлу
 plt.tight_layout()
