@@ -11,3 +11,9 @@ strategy_growth_factor= 1 + df["Strategy_Return"]
 df["Cum_Market_Return"]= market_growth_factor.cumprod()- 1
 df["Cum_Strategy_Return"]= strategy_growth_factor.cumprod()- 1
 df["Portfolio_Value"]=(start_capital *(1+df["Cum_Strategy_Return"])).round(2)
+
+total_market_return= df["Cum_Market_Return"].iloc[-1] * 100
+total_strategy_return= df["Cum_Strategy_Return"].iloc[-1] * 100
+final_balance= df["Portfolio_Value"].iloc[-1]
+net_profit= final_balance -start_capital
+total_trades=sum(df["Signal"]=="Buy")
