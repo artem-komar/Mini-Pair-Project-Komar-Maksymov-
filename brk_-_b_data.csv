@@ -1,6 +1,4 @@
-Price,Open,High,Low,Close,Volume
-Ticker,BRK-B,BRK-B,BRK-B,BRK-B,BRK-B
-Date,,,,,
+Date,Open,High,Low,Close,Volume
 2024-01-02,356.3,362.6,355.9,362.5,4737000
 2024-01-03,362.1,367.9,361.1,366.8,4321800
 2024-01-04,367.4,369.4,363.4,363.7,4142800
