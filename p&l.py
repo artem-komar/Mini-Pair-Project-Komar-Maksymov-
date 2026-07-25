@@ -17,3 +17,10 @@ total_strategy_return= df["Cum_Strategy_Return"].iloc[-1] * 100
 final_balance= df["Portfolio_Value"].iloc[-1]
 net_profit= final_balance -start_capital
 total_trades=sum(df["Signal"]=="Buy")
+
+print(f"Початковий депозит: ${round(start_capital, 2)}")
+print(f"Кінцевий баланс: ${round(final_balance, 2)}")
+print(f"Абсолютний прибуток/збиток: ${round(net_profit, 2)}")
+print(f"Дохідність стратегії: {round(total_strategy_return, 2)}%")
+print(f"Дохідність ринку(Buy & Hold): {round(total_market_return, 2)}%")
+print(f"Кількість угод(Buy): {total_trades}")
