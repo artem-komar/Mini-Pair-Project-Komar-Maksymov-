@@ -21,4 +21,13 @@ df.loc[df["ssignal_change"] == 1, "Signal"] = "Buy"
 df.loc[df["ssignal_change"] == -1, "Signal"] = "Sell"
 
 df = df.dropna(subset=["MA_long"]).copy()
-print(df)
+
+
+print(f"Кількість сигналів Buy: {(df['Signal']=='Buy').sum()}")
+print(f"Кількість сигналів Sell: {(df['Signal']=='Sell').sum()}")
+
+signals_df = df[["Close", "MA_short", "MA_long", "Position", "Signal"]].copy()
+
+print(signals_df)
+
+signals_df.to_csv("trading_signals.csv")
