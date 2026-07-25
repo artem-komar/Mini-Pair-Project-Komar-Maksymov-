@@ -1,7 +1,6 @@
 import pandas as pd
 
 df = pd.read_csv("brk_-_b_data.csv", index_col=0, parse_dates=True)
-print(df)
 short_window = 20
 long_window = 100
 
@@ -9,3 +8,7 @@ long_window = 100
 
 df["MA_short"] = df["Close"].rolling(window=short_window).mean()
 df["MA_long"] = df["Close"].rolling(window=long_window).mean()
+
+df["Position"] = 0
+df.loc[df["MA_short"] > df["MA_long"], "Position"] = 1
+print(df)
