@@ -11,4 +11,6 @@ df["MA_long"] = df["Close"].rolling(window=long_window).mean()
 
 df["Position"] = 0
 df.loc[df["MA_short"] > df["MA_long"], "Position"] = 1
+
+df = df.dropna(subset=["MA_long"]).copy()
 print(df)
