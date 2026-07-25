@@ -27,3 +27,12 @@ print(f"Кількість угод(Buy): {total_trades}")
 
 pnl_df=df[["Close", "MA_short", "MA_long", "Position", "Signal", "Strategy_Return", "Portfolio_Value"]].copy()
 pnl_df.to_csv("pnl_results.csv")
+
+if total_strategy_return > total_market_return:
+    diff=round(total_strategy_return - total_market_return, 2)
+    print(f"Висновок: Стратегія виявилася ефективнішою за ринок на {diff}%!")
+elif total_strategy_return < total_market_return:
+    diff=round(total_market_return - total_strategy_return, 2)
+    print(f"Висновок: Стратегія поступилася ринку на {diff}%. Пасивне утримання було б вигіднішим.")
+else:
+    print("Висновок: Дохідність стратегії та ринку виявилася однаковою.")
