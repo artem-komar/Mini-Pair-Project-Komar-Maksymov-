@@ -21,6 +21,12 @@ plt.plot(df.index, df['Close'], label='Ціна закриття (Close)', color
 plt.plot(df.index, df['MA_short'], label=f'MA Short ({short_window})', color='blue', linestyle='--', alpha=0.8)
 plt.plot(df.index, df['MA_long'], label=f'MA Long ({long_window})', color='orange', linestyle='--', alpha=0.8)
 
+buy_signals = df[df['Signal'] == 'Buy']
+plt.scatter(buy_signals.index, buy_signals['Close'], label='Купівля (Buy)', marker='^', color='green', s=150, zorder=5)
+
+sell_signals = df[df['Signal'] == 'Sell']
+plt.scatter(sell_signals.index, sell_signals['Close'], label='Продаж (Sell)', marker='v', color='red', s=150, zorder=5)
+
 
 #збереження файлу
 plt.tight_layout()
