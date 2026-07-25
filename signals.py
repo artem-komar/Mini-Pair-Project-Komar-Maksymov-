@@ -28,6 +28,7 @@ print(f"Кількість сигналів Sell: {(df['Signal']=='Sell').sum()}
 
 signals_df = df[["Close", "MA_short", "MA_long", "Position", "Signal"]].copy()
 
-print(signals_df)
-
+signals_df = signals_df.round(2)
 signals_df.to_csv("trading_signals.csv")
+
+df = df.round(2)
